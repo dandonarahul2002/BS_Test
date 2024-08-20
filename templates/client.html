@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logs</title>
+    <style>
+        #log {
+            padding: 10px;
+            white-space: pre-wrap;;
+        }
+    </style>
+</head>
+<body>
+    <div id="log"></div>
+    <script>
+        const logElement = document.getElementById('log')
+        var ws = new WebSocket("ws://localhost:8000/logs");
+
+        ws.onmessage = function(event){
+            logElement.innerHTML += event.data + '\n'
+            console.log(event.data)
+        }
+
+        ws.onopen = function(){
+            logElement.innerHTML += "<strong> CONNECTION ESTABLISHED </strong>\n\n"
+        }
+
+    </script>
+</body>
+</html>
